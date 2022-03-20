@@ -15,6 +15,7 @@ import com.example.myapplication.R
 import com.example.myapplication.broadcast_receiver_service.BroadCastServiceFragment
 import com.example.myapplication.databinding.MainFragmentBinding
 import com.example.myapplication.recyclerview.RecyclerViewFragment
+import com.example.myapplication.retrofit.RetrofitFragment
 import com.example.myapplication.viewpager2.ViewpagerFragment
 
 class MainFragment : Fragment() {
@@ -52,6 +53,7 @@ class MainFragment : Fragment() {
 
         val fragments = arrayOf(
             ViewpagerFragment(),
+            RetrofitFragment(),
             RecyclerViewFragment(),
             BroadCastServiceFragment(),
             ViewpagerFragment(),
@@ -60,7 +62,6 @@ class MainFragment : Fragment() {
             ViewpagerFragment(),
             ViewpagerFragment(),
             ViewpagerFragment(),
-            ViewpagerFragment()
         )
 
         for (i: Int in buttons.indices) {

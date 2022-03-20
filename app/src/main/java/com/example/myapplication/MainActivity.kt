@@ -3,12 +3,14 @@ package com.example.myapplication
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.main_fragment.MainFragment
+import com.example.myapplication.repository.RetrofitRepository
 
 /*
 Android 앱에는 많은 구성요소를 포함할 수 있으므로, 사용자 중심의 다양한 작업에 맞게 조정될 수 있어야 한다.
@@ -50,31 +52,38 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val repository = MainRepository()
+        val repository = RetrofitRepository()
         val viewModelFactory = MainViewModelFactory(repository)
         binding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
         val mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         binding.mainViewModel = mainViewModel
-
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // retrofit 네트워크작업을 ViewModel 에서 실행
         mainViewModel.getPost()
         mainViewModel.myResponse.observe(this, Observer {
 
-            if (it.isSuccessful) {
-                Log.d("Response", it.body()!!.userId.toString())
-                Log.d("Response", it.body()!!.id)
-                Log.d("Response", it.body()!!.title)
-                Log.d("Response", it.body()!!.body)
-            } else {
-                Log.d("Response", it.errorBody().toString())
-            }
+//            if (it.isSuccessful) {
+//                Log.d("Response", it.body()!!.userId.toString())
+//                Log.d("Response", it.body()!!.id)
+//                Log.d("Response", it.body()!!.title)
+//                Log.d("Response", it.body()!!.body)
+//            } else {
+//                Log.d("Response", it.errorBody().toString())
+//            }
         })
 
         supportFragmentManager.beginTransaction().replace(MAIN_Container, MainFragment()).commit()
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
+        when(item.itemId) {
+            android.R.id.home -> supportFragmentManager.popBackStack()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onResume() {
@@ -84,12 +93,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         if (savedInstanceState != null) {
-            Log.e("$%^", savedInstanceState.getString("data").toString())
         }
     }
 
     companion object {
         const val BASE_URL = "https://jsonplaceholder.typicode.com/"
         const val MAIN_Container = R.id.main_layout
+        const val NUM_TABS = 3
     }
 }

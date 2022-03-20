@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 // 싱글톤 클래스
-// 레트로핏의 컨트롤러 레이어
+// 레트로핏 객체 생성 및 관리
 object RetrofitInstance {
 
     // Retrofit 객체 초기화
@@ -17,7 +17,7 @@ object RetrofitInstance {
             .build()
     }
 
-    val api: RetrofitService by lazy {
-        retrofit.create(RetrofitService::class.java)
+    val api: RetrofitController by lazy {
+        retrofit.create(RetrofitController::class.java)
     }
 }

@@ -1,8 +1,8 @@
 package com.example.myapplication
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication.repository.RetrofitRepository
 
 
 /*
@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider
   추상 팩토리 패턴에는 팩토리 메소드 패턴이 포함될 수 있다.
 - 결합도 (클레스에 변경사항에 따른 다른클래스의 영향)
 */
-class MainViewModelFactory(private val repository: MainRepository) : ViewModelProvider.Factory {
+class MainViewModelFactory(private val repository: RetrofitRepository) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return MainViewModel(repository) as T

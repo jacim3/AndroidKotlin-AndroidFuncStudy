@@ -13,4 +13,6 @@
     <string name="main_button_list2">레트로핏</string>
     <string name="main_button_list3">리사이클러뷰</string>
     <string name="main_button_list4">브로드캐스트리시버</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
