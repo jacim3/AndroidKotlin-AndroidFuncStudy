@@ -56,10 +56,17 @@ class RecyclerViewFragment : Fragment() {
         viewModel.listData.observe(viewLifecycleOwner, Observer { it ->
 
             if (it.isSuccessful) {
-                val adapter = RecyclerViewAdapter(it.body()!!)
-                binding.recyclerView.adapter = adapter
+
+                RecyclerViewAdapter.getListData(it.body()!!)
+
+                if (binding.recyclerView.adapter == null){
+                    binding.recyclerView.adapter = RecyclerViewAdapter
+                } else
+                    RecyclerViewAdapter.refreshData()
+
                 Handler(Looper.getMainLooper()).postDelayed({
                     dialog.dismiss()
+
                 }, 1000)
             }
         })

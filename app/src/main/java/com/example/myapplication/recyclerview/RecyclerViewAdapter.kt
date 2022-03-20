@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.retrofit.PostDTO
 
-class RecyclerViewAdapter(var listData: List<PostDTO>) :
+object RecyclerViewAdapter :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+
+    lateinit var listData: List<PostDTO>
 
     // itemView 를 지정하는 뷰홀더 -> onCreateViewHolder 에서 필요.
     // 받아온 뷰 정보를 해석하는 역할 수행.
@@ -42,5 +44,21 @@ class RecyclerViewAdapter(var listData: List<PostDTO>) :
     // 출력할 리스트의 갯수 결졍.
     override fun getItemCount(): Int {
         return listData.size
+    }
+
+    fun getListData(listData: List<PostDTO> ) {
+        this.listData = listData
+    }
+
+    fun refreshData() {
+        // notifyDataSetChanged() 는 최후의 수단이며, 자원낭비가 심함.
+        // * payload:Object 는 onBindViewHolder()가 호출될 때 넘겨받음으로써,
+        // 해당 위치에서 로직을 수행하기 위한 체크변수로써 기능을 수행할 수 있다.
+        // notifyItemInserted(position) 해당 위치에 아이템 삽입
+        // notifyItemRangeInserted(position, count) - 대량의 아이템 위치 삽입
+        // notifyItemRemoved(position) - 아이템 삭제
+        // notifyItemMoved(fromPosition, toPosition) - 아이템의 위치 변경. 항목이동 혹은 순위변경 같은로직에 사용
+        // 특정 위치 아이템만 바꿔야 하는 경우 -> notifyItemChanged(position, payload)
+        notifyItemRangeChanged(0, listData.size)
     }
 }

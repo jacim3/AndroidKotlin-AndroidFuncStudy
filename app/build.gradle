@@ -87,4 +87,7 @@ dependencies {
 
     // optional - Test helpers for LiveData
     testImplementation("androidx.arch.core:core-testing:$arch_version")
+
+    // 알람 관련
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
 }

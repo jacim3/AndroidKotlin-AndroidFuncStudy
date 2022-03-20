@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +25,7 @@
         <activity android:name=".A_ViewPager"/>
         <activity android:name=".B_RecyclerView"/>
         <activity android:name=".C_BroadCastingService"/>
+        <receiver android:name=".broadcast_receiver.AlarmReceiver"/>
     </application>
 
 </manifest>
