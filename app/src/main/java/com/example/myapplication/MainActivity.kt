@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.main_fragment.MainFragment
 import com.example.myapplication.repository.RetrofitRepository
+import kotlin.system.exitProcess
 
 /*
 Android 앱에는 많은 구성요소를 포함할 수 있으므로, 사용자 중심의 다양한 작업에 맞게 조정될 수 있어야 한다.
@@ -75,6 +76,7 @@ class MainActivity : AppCompatActivity() {
 //            }
         })
 
+        mainViewModel.alarmAndBootCheck(applicationContext)
         supportFragmentManager.beginTransaction().replace(MAIN_Container, MainFragment()).commit()
     }
 
@@ -100,5 +102,10 @@ class MainActivity : AppCompatActivity() {
         const val BASE_URL = "https://jsonplaceholder.typicode.com/"
         const val MAIN_Container = R.id.main_layout
         const val NUM_TABS = 3
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        exitProcess(0)
     }
 }

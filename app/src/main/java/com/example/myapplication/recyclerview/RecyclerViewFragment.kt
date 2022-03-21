@@ -52,18 +52,21 @@ class RecyclerViewFragment : Fragment() {
 
         viewModel.searchData(listCursor, orderMap, dialog)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val recyclerViewAdapter = RecyclerViewAdapter()
 
+        // 새로운 데이터를 받아옴으로써, LiveData 변동에 따른 로직 수행
+        // TODO 보통은 리스트 스크롤에 따라, 추가 데이터를 읽어오는 트리거를 발생시켜야 하나,
+        // TODO 스크롤 & 스와이프 동작시 에뮬레이터 꺼짐 문제로 인한 임시방변인, 버튼으로 대체.
         viewModel.listData.observe(viewLifecycleOwner, Observer { it ->
-
             if (it.isSuccessful) {
-
-                RecyclerViewAdapter.getListData(it.body()!!)
+                recyclerViewAdapter.getListData(it.body()!!)
 
                 if (binding.recyclerView.adapter == null){
-                    binding.recyclerView.adapter = RecyclerViewAdapter
+                    binding.recyclerView.adapter = recyclerViewAdapter
                 } else
-                    RecyclerViewAdapter.refreshData()
+                    recyclerViewAdapter.refreshData()
 
+                // 데이터를 받아왔으므로 1초뒤 다이얼로그 종료
                 Handler(Looper.getMainLooper()).postDelayed({
                     dialog.dismiss()
 
@@ -71,11 +74,13 @@ class RecyclerViewFragment : Fragment() {
             }
         })
 
+        // 다음데이터 읽기
         binding.buttonNext.setOnClickListener {
             listCursor++
             viewModel.searchData(listCursor, orderMap, dialog)
         }
 
+        // 이전데이터 읽기
         binding.buttonPrev.setOnClickListener {
             listCursor--
             if (listCursor <=0) {
@@ -90,6 +95,8 @@ class RecyclerViewFragment : Fragment() {
 
         val builder = AlertDialog.Builder(requireContext())
         builder.setMessage("로딩중")
+
+        // 다이얼로그의 버튼 및 클릭이벤트는 안씀.
 /*      builder.setPositiveButton("YES") { dialogInterface, i ->
             {
                 //TODO

@@ -1,15 +1,18 @@
 package com.example.myapplication.main_fragment
 
+import android.content.ComponentName
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.myapplication.broadcast_receiver.BroadCastServiceFragment
+import com.example.myapplication.broadcast_receiver.BroadCastFragment
 import com.example.myapplication.databinding.MainFragmentBinding
 import com.example.myapplication.recyclerview.RecyclerViewFragment
 import com.example.myapplication.retrofit.RetrofitFragment
+import com.example.myapplication.service.ServiceFragment
 import com.example.myapplication.viewpager2.ViewpagerFragment
 
 class MainFragment : Fragment() {
@@ -26,6 +29,10 @@ class MainFragment : Fragment() {
     ): View {
         binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -49,8 +56,8 @@ class MainFragment : Fragment() {
             ViewpagerFragment(),
             RetrofitFragment(),
             RecyclerViewFragment(),
-            BroadCastServiceFragment(),
-            ViewpagerFragment(),
+            BroadCastFragment(),
+            ServiceFragment(),
             ViewpagerFragment(),
             ViewpagerFragment(),
             ViewpagerFragment(),

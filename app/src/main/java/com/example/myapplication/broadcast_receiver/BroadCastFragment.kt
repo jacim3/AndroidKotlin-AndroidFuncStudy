@@ -1,21 +1,22 @@
 package com.example.myapplication.broadcast_receiver
 
 import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.databinding.BroadcastFragmentBinding
 import java.util.*
-import kotlin.collections.HashMap
 
-class BroadCastServiceFragment : Fragment() {
+class BroadCastFragment : Fragment() {
 
     private lateinit var viewModel: BroadCastViewModel
     private lateinit var binding: BroadcastFragmentBinding
@@ -48,23 +49,22 @@ class BroadCastServiceFragment : Fragment() {
         super.onViewStateRestored(savedInstanceState)
         val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
+        // 알람 울리기 버튼
         binding.buttonAlarm.setOnClickListener {
-            val dataSet = HashMap<String, Int>()
             val select = Calendar.getInstance()
 
             Log.e("!@#!@#!@#", binding.timePicker.hour.toString())
             select.set(Calendar.HOUR, binding.timePicker.hour);
             select.set(Calendar.MINUTE, binding.timePicker.minute);
             select.set(Calendar.SECOND, 0);
-            
+
             viewModel.startAlarm(requireContext(), alarmManager, select.timeInMillis)
             requestCode++
         }
-
     }
 
     companion object {
-        fun newInstance() = BroadCastServiceFragment()
+        fun newInstance() = BroadCastFragment()
     }
 
 }

@@ -77,6 +77,12 @@ class RetrofitFragment : Fragment() {
         }
     }
 
+    override fun onDetach() {
+        super.onDetach()
+    }
+
+
+
     // Fragment 에 속하는 View 들의 상태값을 모두 읽어온 후 호출
     // 셋팅된 뷰들을 통하여, 해당 뷰들의 상태값 확인을 통하여 수행하는 로직 작성.
     override fun onViewStateRestored(savedInstanceState: Bundle?) {

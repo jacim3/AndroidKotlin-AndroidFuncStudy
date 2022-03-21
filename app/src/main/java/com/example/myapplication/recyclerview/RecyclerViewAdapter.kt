@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.retrofit.PostDTO
 
-object RecyclerViewAdapter :
+class RecyclerViewAdapter :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     lateinit var listData: List<PostDTO>
@@ -24,11 +24,12 @@ object RecyclerViewAdapter :
     }
 
     // ViewHolder 란 뷰를 보관하는 객체로서, 각 구성요소를 반복적으로 접근하는 과정을 간략화 함.
-    // xml 에 지정된 뷰를 inflate 하며, 이를 해석하기 위하여 ViewHolder 클래스에 보내는 역할을 수행.
+    // inflate 하여 생성한 view 에 대한 캐스팅 과정을 위의 별도 생성한 ViewHolder 에 전달하여, 코드를 간략화
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.recyclerview_item, parent, false)
+
         return ViewHolder(view)
     }
 
@@ -41,15 +42,17 @@ object RecyclerViewAdapter :
         holder.textViewBody.text = item.body
     }
 
-    // 출력할 리스트의 갯수 결졍.
+    // 출력할 리스트의 갯수 결졍. (보통 데이터의 리스트 갯수 만큼 출력)
     override fun getItemCount(): Int {
         return listData.size
     }
 
+    // 세터 메서드
     fun getListData(listData: List<PostDTO> ) {
         this.listData = listData
     }
 
+    //
     fun refreshData() {
         // notifyDataSetChanged() 는 최후의 수단이며, 자원낭비가 심함.
         // * payload:Object 는 onBindViewHolder()가 호출될 때 넘겨받음으로써,

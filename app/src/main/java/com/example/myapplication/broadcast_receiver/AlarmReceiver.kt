@@ -8,14 +8,21 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.myapplication.R
 
 class AlarmReceiver : BroadcastReceiver() {
 
+    // 목표시간이 되었을 때, AlarmManager 를 통해 지정한 시간에 따라 로직 수행.
     override fun onReceive(context: Context, intent: Intent) {
-        val requestCode = intent.getIntExtra("requestCode", -1)
 
+        // TODO alarmManager 를 통하여 지정한 시간이 되었을 때, 여기로 PendingIntent 에 감싸서 보내졌던 Intent
+        // TODO 데이터와 Context 정보를 함께 보내준다.
+        // 현재 알람은 설정한 시간과 목표 시간만 체크.
+
+        val requestCode = intent.getIntExtra("requestCode", -1)
+        Log.e("AlarmReceiver : ", requestCode.toString())
         if (requestCode == -1) return
 
         val notifyIntent =
@@ -24,6 +31,8 @@ class AlarmReceiver : BroadcastReceiver() {
         val notifyManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val builder = NotificationCompat.Builder(context, "default")
+
+        // TODO Notification 에 추가 커스터마이징(RemoteViews, CollapseViews 등)이 필요할 경우 추가로직 필요.
         val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getActivity(
                 context,
@@ -51,9 +60,8 @@ class AlarmReceiver : BroadcastReceiver() {
 
         builder.setAutoCancel(false)
             .setDefaults(Notification.DEFAULT_ALL)
-            .setWhen(System.currentTimeMillis())
+            .setWhen(System.currentTimeMillis()).setShowWhen(true)
 
-        notifyManager.notify(requestCode, builder.build())
-//        val notificationIntent = Intent(Intent.ACTION_VIEW, Uri.parse)
+        notifyManager.notify(0, builder.build())
     }
 }

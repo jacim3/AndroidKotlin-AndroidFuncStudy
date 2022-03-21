@@ -1,10 +1,14 @@
 package com.example.myapplication
 
+import android.content.ComponentName
+import android.content.Context
+import android.content.pm.PackageManager
 import android.util.Log
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.broadcast_receiver.BootReceiver
 import com.example.myapplication.repository.RetrofitRepository
 import com.example.myapplication.retrofit.PostDTO
 import com.example.myapplication.viewpager2.ViewpagerFragment
@@ -34,7 +38,7 @@ class MainViewModel(private val repository: RetrofitRepository) : ViewModel() {
     // Scope 종료 시 그 안의 Coroutine 도 같이 종료한다.
     // 네크워크가 종료된 이후, 해당 비동기 코드도 함께 종료하기 위함.
     // launch 내부에서 비동기 작업 처리.
-    fun getPost(){
+    fun getPost() {
         viewModelScope.launch {
             Log.e("!@#!@#!@#", "111111111")
             val response = repository.getPost()
@@ -43,7 +47,7 @@ class MainViewModel(private val repository: RetrofitRepository) : ViewModel() {
         }
     }
 
-    fun getPost2(number:Int) {
+    fun getPost2(number: Int) {
         viewModelScope.launch {
             val response = repository.getPost2(number)
             myResponse2.value = response
@@ -57,18 +61,29 @@ class MainViewModel(private val repository: RetrofitRepository) : ViewModel() {
         }
     }
 
-    fun getCustomPosts2(userId: Int, sort:String, order:String) {
+    fun getCustomPosts2(userId: Int, sort: String, order: String) {
         viewModelScope.launch {
             val response = repository.getCustomPosts2(userId, sort, order)
             myCustomPosts.value = response
         }
     }
 
-    fun getCustomPosts3(userId:Int, option:Map<String, String>) {
+    fun getCustomPosts3(userId: Int, option: Map<String, String>) {
         viewModelScope.launch {
             val response = repository.getCustomPosts3(userId, option)
             myCustomPosts.value = response
         }
+    }
+
+    // 앱 실행 시 부트 리시버 보내놓기. -> 세부 로직은 BootReceiver 클래스에서 수행.
+    fun alarmAndBootCheck(context: Context) {
+        val packageManager = context.packageManager
+        val bootReceiver = ComponentName(context, BootReceiver::class.java)
+        packageManager.setComponentEnabledSetting(
+            bootReceiver, PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+            PackageManager.DONT_KILL_APP
+        )
+        Log.e("BootReceiverRegistered", "!@#!@#")
     }
 
     fun moveToFragment(fragmentManager: FragmentManager, index: Int) {
