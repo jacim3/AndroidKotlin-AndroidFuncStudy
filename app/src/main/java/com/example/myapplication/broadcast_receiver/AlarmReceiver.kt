@@ -32,27 +32,13 @@ class AlarmReceiver : BroadcastReceiver() {
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val builder = NotificationCompat.Builder(context, "default")
 
-        // TODO Notification 에 추가 커스터마이징(RemoteViews, CollapseViews 등)이 필요할 경우 추가로직 필요.
-        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.getActivity(
-                context,
-                requestCode,
-                notifyIntent,
-                PendingIntent.FLAG_MUTABLE
-            )
-        } else {
-            PendingIntent.getActivity(context, requestCode, notifyIntent, 0)
-        }
-
         // 오레오부터 알람채널 필요
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             builder.setSmallIcon(R.drawable.ic_launcher_foreground)
-            val name = "채널 이름"
-            val desc = "알람입니다."
             val importance = NotificationManager.IMPORTANCE_HIGH // 소리 + 메시지
 
-            val channel = NotificationChannel("default", name, importance)
-            channel.description = desc
+            val channel = NotificationChannel("default", "채널 이름", importance)
+            channel.description = "알람입니다."
 
             notifyManager.createNotificationChannel(channel)
         } else

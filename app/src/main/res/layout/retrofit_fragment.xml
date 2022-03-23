@@ -10,12 +10,14 @@
         android:id="@+id/editTextQuery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonQuery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/editTextQuery" />
 
     <TextView
@@ -23,6 +25,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hello"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/buttonQuery" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNext"
+        app:layout_constraintTop_toBottomOf="@+id/textViewResult" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonPrev"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="이전"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonNext"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="다음"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

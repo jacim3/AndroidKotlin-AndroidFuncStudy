@@ -47,18 +47,17 @@ class BroadCastFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-        val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
 
         // 알람 울리기 버튼
         binding.buttonAlarm.setOnClickListener {
             val select = Calendar.getInstance()
 
-            Log.e("!@#!@#!@#", binding.timePicker.hour.toString())
             select.set(Calendar.HOUR, binding.timePicker.hour);
             select.set(Calendar.MINUTE, binding.timePicker.minute);
             select.set(Calendar.SECOND, 0);
 
-            viewModel.startAlarm(requireContext(), alarmManager, select.timeInMillis)
+            viewModel.startAlarm(requireContext(), requireActivity(), select.timeInMillis)
             requestCode++
         }
     }

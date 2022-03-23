@@ -10,8 +10,15 @@
         android:id="@+id/viewPager2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/appBarLayout"
+        app:layout_constraintBottom_toTopOf="@+id/circleIndicator"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <me.relex.circleindicator.CircleIndicator3
+        android:id="@+id/circleIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:ci_drawable="@drawable/circleindicator_dot"
+        app:layout_constraintBottom_toTopOf="@+id/appBarLayout" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -26,11 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="5dp"
-            app:tabBackground="@drawable/custom_tab_indicator"
             app:tabIndicatorColor="#00000000">
 
         </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

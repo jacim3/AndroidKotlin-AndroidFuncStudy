@@ -19,7 +19,7 @@ interface RetrofitController {
     //단일 쿼리
     @GET("posts")
     suspend fun getCustomPosts(
-        @Query("userId") userOd : Int
+        @Query("userId") userId : Int
     ):Response<List<PostDTO>>
     
     // 다중 쿼리
@@ -38,4 +38,10 @@ interface RetrofitController {
         @QueryMap options: Map<String, String>
     ):Response<List<PostDTO>>
 
+
+    // http://reqres.in/
+    @GET("api/users?")
+    suspend fun getUserList(
+        @Query("page") page:Int
+    ):Response<MemberDTO>
 }

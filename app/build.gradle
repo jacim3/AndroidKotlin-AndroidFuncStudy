@@ -52,6 +52,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
     // viewPager2
     implementation("androidx.viewpager2:viewpager2:1.0.0")
+    // circleIndicator
+    implementation 'me.relex:circleindicator:2.1.6'
 
     // fragment-KTX : 프래그먼트 트랜젝션 단순화
     implementation("androidx.fragment:fragment-ktx:1.4.1")
@@ -90,4 +92,8 @@ dependencies {
 
     // 알람 관련
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
+
+    // Android Glide Library
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 }

@@ -14,15 +14,12 @@ class VIewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     }
 
     override fun createFragment(position: Int): Fragment {
-        var fragment:Fragment = Tab1()
 
-        when(position) {
-            0 -> fragment = Tab1()
-            1 -> fragment = Tab2()
-            2 -> fragment = Tab3()
+        return when(position) {
+            0 -> Tab1()
+            1 -> Tab2()
+            2 -> Tab3()
+            else -> Tab1()
         }
-
-        return fragment
     }
-
 }
