@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!--포그라운드 서비스 명시-->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +19,10 @@
         android:theme="@style/Theme.MyApplication">
         <service
             android:name=".service.MyService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name=".handler.MusicService"
             android:enabled="true"
             android:exported="false" />
 

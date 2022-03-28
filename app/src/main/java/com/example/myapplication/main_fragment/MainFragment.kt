@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.myapplication.broadcast_receiver.BroadCastFragment
+import com.example.myapplication.coroutine.CoroutineFragment
 import com.example.myapplication.databinding.MainFragmentBinding
+import com.example.myapplication.handler.HandlerFragment
 import com.example.myapplication.recyclerview.RecyclerViewFragment
 import com.example.myapplication.retrofit.RetrofitFragment
 import com.example.myapplication.service.ServiceFragment
@@ -58,8 +60,8 @@ class MainFragment : Fragment() {
             RecyclerViewFragment(),
             BroadCastFragment(),
             ServiceFragment(),
-            ViewpagerFragment(),
-            ViewpagerFragment(),
+            CoroutineFragment(),
+            HandlerFragment(),
             ViewpagerFragment(),
             ViewpagerFragment(),
             ViewpagerFragment(),
