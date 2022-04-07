@@ -1,10 +1,8 @@
 package com.example.myapplication.service
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
-import android.view.View
-import androidx.lifecycle.AndroidViewModel
+import android.os.Binder
 import androidx.lifecycle.ViewModel
 
 class ServiceViewModel : ViewModel() {

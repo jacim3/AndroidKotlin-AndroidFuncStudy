@@ -14,18 +14,17 @@ data class MemberDTO(
         val id: Int,
         @SerializedName("email")
         @Expose
-        val email:String,
+        val email: String,
         @SerializedName("first_name")
         @Expose
-        val firstName:String,
+        val firstName: String,
         @SerializedName("last_name")
         @Expose
-        val lastName:String,
+        val lastName: String,
         @SerializedName("avatar")
         @Expose
-        val profileImage:String
+        val profileImage: String
     )
 }
-
 
 

@@ -17,8 +17,13 @@
     <string name="main_button_list6">코루틴</string>
     <string name="main_button_list7">핸들러</string>
     <string name="main_button_list8">브로드캐스트리시버</string>
-    <string name="main_button_list9">브로드캐스트리시버</string>
     <string name="main_button_list10">브로드캐스트리시버</string>
+    <string name="main_button_list13">대거힐트</string>
+
+    <string name="button_music_play">음악 시작</string>
+    <string name="button_music_pause">음악 종료</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_movie_play">영화 시작</string>
+    <string name="title_activity_dagger">DaggerActivity</string>
 </resources>

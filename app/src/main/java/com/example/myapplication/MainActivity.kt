@@ -13,6 +13,7 @@ import com.example.myapplication.main_fragment.MainFragment
 import com.example.myapplication.repository.RetrofitRepository
 import kotlin.system.exitProcess
 
+
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null

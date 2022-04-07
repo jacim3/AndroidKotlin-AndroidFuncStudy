@@ -1,6 +1,5 @@
 package com.example.myapplication.main_fragment
 
-import android.content.ComponentName
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -10,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.myapplication.broadcast_receiver.BroadCastFragment
 import com.example.myapplication.coroutine.CoroutineFragment
+import com.example.myapplication.dagger_hilt.main.DaggerActivity
 import com.example.myapplication.databinding.MainFragmentBinding
 import com.example.myapplication.handler.HandlerFragment
 import com.example.myapplication.recyclerview.RecyclerViewFragment
@@ -71,6 +71,11 @@ class MainFragment : Fragment() {
             buttons[i].setOnClickListener {
                 activity?.let { it1 -> viewModel.moveToFragment(it1.supportFragmentManager,fragments[i]) }
             }
+        }
+
+        binding.daggerActivity.setOnClickListener {
+            val intent = Intent(requireContext(), DaggerActivity::class.java)
+            startActivity(intent)
         }
     }
 }

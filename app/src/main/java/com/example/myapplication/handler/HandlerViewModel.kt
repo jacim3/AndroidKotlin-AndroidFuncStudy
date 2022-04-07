@@ -1,14 +1,20 @@
 package com.example.myapplication.handler
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.Movie
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.util.*
 
 class HandlerViewModel : ViewModel() {
 
@@ -17,7 +23,12 @@ class HandlerViewModel : ViewModel() {
     var musicStatus = ""
     var movieStatus = ""
 
-    fun runThread(textViewBackValue: TextView, activity: Activity) {
+
+
+    val musicGroup = ThreadGroup("musicGroup")
+    val movieGroup = ThreadGroup("movieGroup")
+
+    fun runThread1(textViewBackValue: TextView, activity: Activity) {
 
         // 4번 방식의 Handler 에서 받은 메시지를 별도 처리
         val mHandler: Handler = object : Handler(Looper.myLooper()!!) {
@@ -26,8 +37,10 @@ class HandlerViewModel : ViewModel() {
                 //textViewBackValue.text = msg.what.toString()
 
                 when (msg.what) {
-                    PLAY -> {}
-                    PAUSE -> {}
+                    PLAY -> {
+                    }
+                    PAUSE -> {
+                    }
                 }
             }
         }
@@ -37,12 +50,11 @@ class HandlerViewModel : ViewModel() {
             while (true) {
 
 
-
                 try {
 
                     // 뷰모델 데이터 홀더에 데이터 입력.
                     // 1.1 MutableLiveData 는 MainThread 에서만 setValue 가능. -> 대신 postValue() 사용
-                    currentNumber ++
+                    currentNumber++
                     Thread.sleep(250)
 /* --------------------- WorkerThread 에서 MainThread 로 작업을 전달하는 방법 ------------------------ */
 
@@ -105,9 +117,11 @@ class HandlerViewModel : ViewModel() {
         const val MUSIC = 0
         const val CHATTING = 1
         const val MOVIE = 2
-        
+
         const val MUSIC_TEXT = "음악 : "
         const val CHATTING_TEXT = "채팅 : "
         const val MOVIE_TEXT = "영화 : "
+
+
     }
 }
