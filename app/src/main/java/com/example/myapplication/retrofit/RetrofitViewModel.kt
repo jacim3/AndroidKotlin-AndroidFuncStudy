@@ -17,7 +17,6 @@ class RetrofitViewModel : ViewModel() {
         viewModelScope.launch {
             dialog.show()
             val response = RetrofitInstance.api2.getUserList(page)
-
             memberListData.value = response.body()?.memberList
         }
     }

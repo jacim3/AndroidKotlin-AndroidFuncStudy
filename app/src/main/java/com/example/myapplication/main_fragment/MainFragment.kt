@@ -11,6 +11,7 @@ import com.example.myapplication.broadcast_receiver.BroadCastFragment
 import com.example.myapplication.coroutine.CoroutineFragment
 import com.example.myapplication.dagger_hilt.main.DaggerActivity
 import com.example.myapplication.databinding.MainFragmentBinding
+import com.example.myapplication.example_study.main.MaskActivity
 import com.example.myapplication.handler.HandlerFragment
 import com.example.myapplication.recyclerview.RecyclerViewFragment
 import com.example.myapplication.retrofit.RetrofitFragment
@@ -71,6 +72,11 @@ class MainFragment : Fragment() {
             buttons[i].setOnClickListener {
                 activity?.let { it1 -> viewModel.moveToFragment(it1.supportFragmentManager,fragments[i]) }
             }
+        }
+
+        binding.buttonStudyApp.setOnClickListener {
+            val intent = Intent(requireContext(), MaskActivity::class.java)
+            startActivity(intent)
         }
 
         binding.daggerActivity.setOnClickListener {
