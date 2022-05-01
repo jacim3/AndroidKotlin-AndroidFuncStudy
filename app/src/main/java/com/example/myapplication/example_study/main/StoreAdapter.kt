@@ -44,7 +44,8 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.Companion.StoredViewHolde
 //        var remainCount = ""
 //        var color = Color.GREEN
 
-       /* when (item.remain_status) {
+/*
+        when (item.remain_status) {
             "plenty" -> {
                 remainStat = "100개 이상"
                 remainCount = "충분"

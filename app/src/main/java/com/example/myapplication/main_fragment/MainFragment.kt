@@ -13,6 +13,7 @@ import com.example.myapplication.dagger_hilt.main.DaggerActivity
 import com.example.myapplication.databinding.MainFragmentBinding
 import com.example.myapplication.example_study.main.MaskActivity
 import com.example.myapplication.handler.HandlerFragment
+import com.example.myapplication.reactive.ReactiveFragment
 import com.example.myapplication.recyclerview.RecyclerViewFragment
 import com.example.myapplication.retrofit.RetrofitFragment
 import com.example.myapplication.service.ServiceFragment
@@ -63,7 +64,7 @@ class MainFragment : Fragment() {
             ServiceFragment(),
             CoroutineFragment(),
             HandlerFragment(),
-            ViewpagerFragment(),
+            ReactiveFragment(),
             ViewpagerFragment(),
             ViewpagerFragment(),
         )

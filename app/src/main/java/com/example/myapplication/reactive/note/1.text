@@ -1,0 +1,60 @@
+Reactive Programming 은 관찰 가능한 시퀀스를 통하여, 비동기 및 이벤트 기반 프로그래밍을 하기 위한 라이브러리.
+저수준 쓰레드 동기화, Thread 안전성, non=blocking IO 에 대한 문제를 추상화하여 시퀀스를 선언적으로 구성할 수 있도록 한다.
+
+                single items	      multiple items
+synchronous	    T getData()	          Iterable<T> getData()
+asynchronous	Future<T> getData()	  Observable<T> getData()
+
+
+Java Future 는 단일레벨의 비동기 실행에는 적합하나, 그들이 중첩되면서 복잡성을 증가시킨다.
+그러므로, 조건부 비동기 실행 플로우를 최적으로 구성하는 것에 Future 를 사용하는 것은 어렵거나 각 요청에 대한 런타임 요청시간이
+다르므로 불가능 하다. 이것을 실행할 수 있어도, 빠르게 복잡해지거나, 오류가 발생하기 쉽고, Future.get()에서 조기에 차단되는 것으로
+비동기의 이점을 제거한다.
+
+ReactiveX Observable 모델을 사용함으로써, Array 와 같은 Collection 에서 사용하는 것과 동일한 종류의 작업으로
+비동기 이벤트 스트림의 처리가 가능. 이는 코드의 가독성과 버그의 발생을 개선한다.
+ReactiveX 는 동시성 또는 비동기성 특정소스의 편향 없이 쓰레드풀, 이벤트루프, non blocking IO 등을 구현가능
+클라이언트 코드는 기본구현이 blocking 여부와 상관없이 Observable 과의 모든 상호작용의 비동기식 처리 및 구현 가능
+
+Iterable 은 소비자가 생산자에서 값을 가져오고 해당 값을 도착할때까지 스레드가 차단
+Observable 을 사용하면 값을 '사용할 수 있을 때' 생산자가 소비자에 값을 푸시함으로써, 보다 유연하게 사용이 가능.
+
+* Iterable
+getDataFromLocalMemory()
+    .skip(10)
+    .take(5)
+    .map({ s -> return s + " transformed" })
+    .forEach({ println "next => " + it })
+
+* Observable
+getDataFromNetwork()
+    .skip(10)
+    .take(5)
+    .map({ s -> return s + " transformed" })
+    .subscribe({ println "onNext => " + it })
+
+==> 여기서, 생산자에 더이상 데이터가 없는 경우, 이러한 신호를 소비자에게 보냄
+    1. Iterable : forEach 종료 및 정상반환
+    2. Observable : onCompleted() 호출
+==> 도중 에러가 발생하는 경우,
+    1. Iterable : Exception Throw
+    2. Observable : onError 호출출
+
+함수형 프로그래밍 = 코딩 중 변수의 사용을 지양하고, 순수 함수를 사용하여 프로그래밍.
+가능한 변수의 사용을 자제하고, 순수함수들을 통하여, 외부의 데이터를 변경하지 않고, 받아온 값들을 내부에처 처리하여 리턴한다.
+
+이점 : 코드에서 변수의 노출을 최대한 자제하여, 프로그래머의 착오로인한 오류 및 쓰레드 동시접근에 따른 교착문제들로부터도
+자유로워 진다.
+
+그러므로 함수형 프로그래밍은 선언형 프로그래밍의 성격도 갖는다. 또한 직접 알고리즘을 구현하는 대신, 언어 혹은 라이브러에서
+제공되는 순수 함수들을 필요한곳에 가져다 쓰는 방식으로 코딩이 이루어진다.
+
+1. Observable : 관찰될 수 있는것. 관찰되는 대상. Observable 에 의하여 연속적으로 발행되어 나오는 값을 흐름 (stream)이라 한다.
+2. Operators : 데이터를 처리하는 Pure Function 영역
+3. SubScribe : Operator 을 거치며, 출력된 결과. Observer 가 이러한 결과를 기다리며 반응함
+
+단순 1차원 데이터분 아니라, 시간의 흐름, 사용자의 동작, 네트워크 요청의 결과까지 전부 stream 으로 처리할 수 있다.
+
+
+
+

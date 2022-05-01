@@ -16,7 +16,7 @@
     <string name="main_button_list5">서비스</string>
     <string name="main_button_list6">코루틴</string>
     <string name="main_button_list7">핸들러</string>
-    <string name="main_button_list8">브로드캐스트리시버</string>
+    <string name="main_button_list8">Rx</string>
     <string name="main_button_list10">브로드캐스트리시버</string>
     <string name="main_button_list13">대거힐트</string>
 
